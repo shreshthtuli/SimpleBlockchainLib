@@ -47,7 +47,7 @@ public class Blockchain implements Serializable{
 
 	public String GetAllData(String delimiter){
 		StringBuilder allData = new StringBuilder("");
-		for(int i = 0; i < this.chain.size(); i++){
+		for(int i = 1; i < this.chain.size(); i++){
 			allData.append(this.chain.get(i).data);
 			allData.append(delimiter);
 		}

@@ -19,9 +19,11 @@ public class TestBlockchain{
 			if(option.contains("a")){
 				System.out.println("Enter data:");
 				String data = sc.nextLine();
+				// Add data point
 				test.AddBlock(data);
 			}
 			else if(option.contains("b")){
+				// Validate blockchain integrity. Pass if no errors
 				test.ValidateChain();
 			}
 			else if(option.contains("c")){
@@ -29,15 +31,19 @@ public class TestBlockchain{
 				int loc = Integer.parseInt(sc.nextLine().trim());
 				System.out.println("Enter data:");
 				String dat = sc.nextLine();
+				// Change data maliciously, numbering starts from 1 not 0
 				test.chain.get(loc).data = dat;
 			}
 			else if(option.contains("d")){
+				// Save blockchain to file
 				test.SaveChain("testchain");
 			}
 			else if(option.contains("e")){
+				// Load blockchain from file
 				test = new Blockchain("testchain");
 			}
 			else if(option.contains("f")){
+				// Print all datapoints in blockchain
 				System.out.println(test.GetAllData("\n"));
 			}
 		}
