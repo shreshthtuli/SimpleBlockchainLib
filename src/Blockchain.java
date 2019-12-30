@@ -38,6 +38,15 @@ public class Blockchain{
 		i++;
 	}
 
+	public String GetAllData(String delimiter){
+		StringBuilder allData = new StringBuilder("");
+		for(int i = 0; i < this.chain.size(); i++){
+			allData.append(this.chain.get(i).data);
+			allData.append(delimiter);
+		}
+		return allData.toString();
+	}
+
 	public void ValidateChain() throws Exception{
 		for(int i = 1; i < this.chain.size(); i++){
 			Block currentBlock = this.chain.get(i);
@@ -65,7 +74,7 @@ public class Blockchain{
         }
 	}
 
-	public static String repeat(int count, String with) {
+	private static String repeat(int count, String with) {
     	return new String(new char[count]).replace("\0", with);
 	}
 	
