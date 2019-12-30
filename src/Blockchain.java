@@ -9,7 +9,7 @@ import static java.lang.Integer.parseInt;
 import java.util.Arrays;
 import java.lang.Object;
 
-public class Blockchain{
+public class Blockchain implements Serializable{
 
 	public List<Block> chain;
 	private int i = 1;
@@ -20,10 +20,11 @@ public class Blockchain{
 		this.chain.add(CreateGenesisBlock());
 	}
 
-	public Blockchain(String filename){
-		FileInputStream fi = new FileInputStream(new File(filename));
+	public Blockchain(String filename) throws Exception{
+		FileInputStream fi = new FileInputStream(new File(filename + ".blockchain"));
 		ObjectInputStream oi = new ObjectInputStream(fi);
-		List<Block> this.chain = (List<Block>) oi.readObject();
+		this.chain = new ArrayList<Block>();
+		this.chain = (List<Block>) oi.readObject();
 	}
 
 	private Block CreateGenesisBlock(){
@@ -53,8 +54,8 @@ public class Blockchain{
 		return allData.toString();
 	}
 
-	public void SaveChain(String filename){
-		FileOutputStream f = new FileOutputStream(new File(filename));
+	public void SaveChain(String filename) throws Exception{
+		FileOutputStream f = new FileOutputStream(new File(filename + ".blockchain"));
 		ObjectOutputStream o = new ObjectOutputStream(f);
 
 		// Write objects to file

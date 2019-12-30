@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.text.SimpleDateFormat;
 
-public class Block{
+public class Block implements Serializable{
 
 	public String data;
 	public String hash;
