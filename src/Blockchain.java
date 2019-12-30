@@ -20,6 +20,12 @@ public class Blockchain{
 		this.chain.add(CreateGenesisBlock());
 	}
 
+	public Blockchain(String filename){
+		FileInputStream fi = new FileInputStream(new File(filename));
+		ObjectInputStream oi = new ObjectInputStream(fi);
+		List<Block> this.chain = (List<Block>) oi.readObject();
+	}
+
 	private Block CreateGenesisBlock(){
 		return new Block(0, "", "");
 	}
@@ -45,6 +51,16 @@ public class Blockchain{
 			allData.append(delimiter);
 		}
 		return allData.toString();
+	}
+
+	public void SaveChain(String filename){
+		FileOutputStream f = new FileOutputStream(new File(filename));
+		ObjectOutputStream o = new ObjectOutputStream(f);
+
+		// Write objects to file
+		o.writeObject(this.chain);
+		o.close();
+		f.close();
 	}
 
 	public void ValidateChain() throws Exception{
@@ -77,10 +93,6 @@ public class Blockchain{
 	private static String repeat(int count, String with) {
     	return new String(new char[count]).replace("\0", with);
 	}
-	
-
-
-
 }
 
 
